@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package grpc;
+
+message Town {
+  string id = 1;
+  string town_code = 2;
+  string town_name = 3;
+}
+
+message TownList {
+  repeated Town lists = 1;
+}
+
+message GetTown {
+  string town_code = 1;
+}
+
+message Empty { 
+}
+
+message GetTownSlot {
+  string type = 1;
+  string town_code = 2;
+}
+
+message GetAllTownSlot {
+  string town_code = 1;
+}
+
+message TownSlot {
+  string town_code = 1;
+  string town_name = 2;
+  int64 town_slot = 3;
+  string type_id = 4;
+  string type_name = 5;
+  string town_slot_id = 6;
+}
+
+message TownSlotList {
+  repeated TownSlot list = 1;
+}
+
+service Towns {
+  rpc GetTownByCode(GetTown) returns (Town) {};
+  rpc GetAllTown(Empty) returns (TownList) {};
+  rpc GetTownSlotByType(GetTownSlot) returns (TownSlot){};
+  rpc GetAllTownSlotByType(GetAllTownSlot) returns (TownSlotList){};
+}

@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package grpc;
+
+message LogOutRequest{
+  string town_code = 1;
+  string plat_number = 2;
+  string time_out = 3;
+}
+
+message Log {
+  string town_name = 1;
+  float total_time = 2;
+  string time_in = 3;
+  string time_out = 4;
+  string date_at = 5;
+  string plat_number = 6;
+  string vehicle_type = 7;
+  string date_out_at = 8;
+  string town_code = 9;
+}
+
+message GetLogReport {
+  string date = 1;
+  string town_code = 2;
+}
+
+message TownLogReport {
+  string town_code = 1;
+  string vehicle_type = 3;
+  int64  total_logged = 2;
+  int64  quantity = 4;
+}
+
+message TownLogReportList {
+  string date = 2;
+  repeated TownLogReport list = 1;
+}
+
+service Logs {
+  rpc LogOutVehicle(LogOutRequest) returns(Log) {};
+  rpc ReportLogged(GetLogReport) returns(TownLogReportList){};
+}

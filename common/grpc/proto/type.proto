@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package grpc;
+
+message Type {
+  string id = 1;
+  string type_name = 2;
+}
+
+message TypeList {
+  repeated Type list = 1;
+}
+
+message EmptyType {
+}
+
+message TypesAddRequest {
+  string name = 1;
+}
+
+message TypesAddRequestList {
+  repeated TypesAddRequest towns = 1;
+}
+
+service Types {
+  rpc GetAllType(EmptyType) returns (TypeList) {};
+  rpc BulkAddType(TypesAddRequestList) returns(EmptyType) {};
+}
